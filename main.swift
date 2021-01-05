@@ -1,18 +1,23 @@
 import Foundation
 import XCTest
 
-let (name, arg1) = (
-    CommandLine.arguments.first,
-    CommandLine.arguments.dropFirst().first
+var argv = CommandLine.arguments
+
+let (name, option) = (
+    argv.removeFirst(),
+    argv.first
 )
 
-switch arg1 {
+switch option {
 case .none:
     run()
 case "--test":
     runTests()
-default:
-    printHelp()
+case "--help":
+    printHelp(for: name)
+case .some(let option):
+    printError(for: option)
+    printHelp(for: name)
 }
 
 func run() { 
@@ -45,6 +50,10 @@ func runTests() {
     testSuites.forEach { $0.run() }
 }
 
-func printHelp() { 
-    print("usage: \(name ?? "cmd") [--test]")
+func printHelp(for name: String) { 
+    print("usage: \(name) [--test] [--help]")
+}
+
+func printError(for option: String) { 
+    print("error: unknown option `\(option)`")
 }
