@@ -1,4 +1,5 @@
 import Foundation
+import XCTest
 
 let (arg1, arg2) = (
     CommandLine.arguments.first,
@@ -33,8 +34,15 @@ func run() {
 }
 
 func runTests() { 
-    // TODO
-    print(#function)
+    let testCases: [AnyClass] = [
+        AnyEquatableTests.self
+    ]
+
+    let testSuites = testCases.map {
+        XCTestSuite(forTestCaseClass: $0)
+    }
+
+    testSuites.forEach { $0.run() }
 }
 
 func printHelp() { 
