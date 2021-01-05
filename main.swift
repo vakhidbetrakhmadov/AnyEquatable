@@ -1,12 +1,12 @@
 import Foundation
 import XCTest
 
-let (arg1, arg2) = (
+let (name, arg1) = (
     CommandLine.arguments.first,
     CommandLine.arguments.dropFirst().first
 )
 
-switch arg2 {
+switch arg1 {
 case .none:
     run()
 case "--test":
@@ -46,5 +46,5 @@ func runTests() {
 }
 
 func printHelp() { 
-    print("usage: \(arg1 ?? "cmd") [--test]")
+    print("usage: \(name ?? "cmd") [--test]")
 }
