@@ -3,17 +3,19 @@ run: build
 	./main
 
 .PHONY: test
-test:
-	# TODO
+test: build
+	./main --test
 
 .PHONY: build
 build: main
 
 .PHONY: clean
 clean:
-	rm main
+	rm -f main
 
-main: 
-	swiftc main.swift AnyEquatable.swift
+main: main.swift AnyEquatable.swift AnyEquatableTests.swift
+	swiftc -F $(FRAMEWORKS) -Xlinker -rpath -Xlinker $(FRAMEWORKS) main.swift AnyEquatable.swift AnyEquatableTests.swift
 
-.DEFAULT_GOAL := run
+.DEFAULT_GOAL := build
+
+FRAMEWORKS = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks
