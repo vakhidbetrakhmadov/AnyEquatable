@@ -17,7 +17,7 @@ public struct AnyEquatable:
     
     // MARK: - Equatable
     public static func == (lhs: AnyEquatable, rhs: AnyEquatable) -> Bool {
-        lhs.isEqual(rhs)
+        lhs.isEqual(rhs) && rhs.isEqual(lhs)
     }
 }
 
