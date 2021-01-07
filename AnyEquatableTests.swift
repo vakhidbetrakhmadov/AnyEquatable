@@ -1,5 +1,3 @@
-// TODO: Add more tests
-
 import XCTest
 
 final class AnyEquatableTests: 
@@ -50,6 +48,22 @@ final class AnyEquatableTests:
         parameterized_test__A_equals_B__yields_expected(
             a: Optional<Int>.none,
             b: Optional<Int>.none,
+            expected: true
+        )
+    }
+
+    func test__Array_Int_1_equals_Array_Int_1__is_true() { 
+        parameterized_test__A_equals_B__yields_expected(
+            a: [1],
+            b: [1],
+            expected: true
+        )
+    }
+
+    func test__Array_Int_empty_equals_Array_Int_empty__is_true() { 
+        parameterized_test__A_equals_B__yields_expected(
+            a: [Int](),
+            b: [Int](),
             expected: true
         )
     }
@@ -115,6 +129,22 @@ final class AnyEquatableTests:
         parameterized_test__A_equals_B__yields_expected(
             a: Optional<Int?>.none,
             b: Optional<Double?>.some(.none),
+            expected: false
+        )
+    }
+    
+    func test__Array_Int_1_equals_Array_Double_1__is_false() { 
+        parameterized_test__A_equals_B__yields_expected(
+            a: [1],
+            b: [1.0],
+            expected: false
+        )
+    }
+
+    func test__Array_Int_1_equals_Array_Int_empty__is_false() { 
+        parameterized_test__A_equals_B__yields_expected(
+            a: [1],
+            b: [Int](),
             expected: false
         )
     }
