@@ -1,1 +1,3 @@
-// TODO
+# AnyEquatable
+
+A type erased Equatable container.
